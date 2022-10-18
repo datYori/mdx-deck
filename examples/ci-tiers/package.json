@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@mdx-deck/justask8s-example",
+  "name": "@mdx-deck/ci-tiers-example",
   "version": "4.1.1",
   "scripts": {
     "start": "mdx-deck deck.mdx",
