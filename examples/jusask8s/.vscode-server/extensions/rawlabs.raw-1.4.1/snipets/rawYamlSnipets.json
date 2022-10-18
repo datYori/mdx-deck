@@ -1,0 +1,82 @@
+{
+    "Raw Site Yaml Schema": {
+        "prefix": "raw-site-schema-import",
+        "body": [
+            "# yaml-language-server: $$schema=https://cdn.raw-labs.com/raw-site-schemaV0.9.json"
+        ],
+        "description": "Creates a schema entry for a site yaml file"
+    },
+    "Raw Endpoint Yaml Schema": {
+        "prefix": "raw-endpoint-schema-import",
+        "body": [
+            "# yaml-language-server: $$schema=https://cdn.raw-labs.com/endpoint-schemaV0.9.json"
+        ],
+        "description": "Creates a schema entry for an endpoint yaml file"
+    },
+    "Raw Initialize Site yaml file": {
+        "prefix": "raw-site-yaml-init",
+        "body": [
+            "# yaml-language-server: $$schema=https://cdn.raw-labs.com/raw-site-schemaV0.9.json",
+            "raw: 0.9",
+            "publishUrl: ${2:url}",
+            "enabled: ${3|true,false|}"
+        ],
+        "description": "Initializes raw-site.yaml file content"
+    },
+    "Raw Initialize Required Endpoint Fields": {
+        "prefix": "raw-endpoint-req-init",
+        "body": [
+            "# yaml-language-server: $$schema=https://cdn.raw-labs.com/endpoint-schemaV0.9.json",
+            "raw: 0.9",
+            "endpoint: GET",
+            "code: rql",
+            "codeFile: ${4:codefile}",
+            "format: ${5|json,csv|}",
+            "computeClass: normal"
+        ],
+        "description": "Initializes the required fields for endpoint yaml file"
+    },
+    "Raw Initialize All Endpoint Fields": {
+        "prefix": "raw-endpoint-all-init",
+        "body": [
+            "# yaml-language-server: $$schema=https://cdn.raw-labs.com/endpoint-schemaV0.9.json",
+            "raw: 0.9",
+            "endpoint: GET",
+            "code: rql",
+            "codeFile: ${1:relative-path-to-code-file}",
+            "format: ${2|json,csv|}",
+            "computeClass: normal",
+            "enabled: ${3|true,false|}",
+            "cacheSizeMB: ${4:200}",
+            "computeLimitSeconds: ${5:10}",
+            "declaration: ${6:rql-function-declaration}",
+            "metadata:",
+            "  title: ${7:title-of-your-endpoint}",
+            "  description: ${8:description-of-your-endpoint}",
+            "  tags:",
+            "    - ${9:tag1}",
+            "  termsOfService: ${10:termsOfService}",
+            "  author: ${11:author}",
+            "  contact:",
+            "    name: ${12:name}",
+            "    url: ${13:url}",
+            "    email: ${14:email@your-email.com}",
+            "  license:",
+            "    name: ${15:name}",
+            "    url: ${16:url}",
+            "  version: ${17:version}",
+            "security:",
+            "  public: ${18|true,false|}",
+            "  scopes:",
+            "    - scope1",
+            "refreshSeconds: ${19:10}",
+            "tests:",
+            "  - name: ${20:name-of-the-test}",
+            "    description: ${21:description-of-the-test}",
+            "    arguments:",
+            "      - key: ${22:name-of-the-argument}",
+            "        value: ${23:value-of-the-argument}"
+        ],
+        "description": "Initializes all the fields for endpoint yaml file"
+    }
+}

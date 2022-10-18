@@ -18,57 +18,52 @@ import {
 
 ---
 
-## Where we started ?
+## Rolling Upgrade
 
 <Steps>
 
-- 2 EC2 instances
-  - prod
-  - testing
+- Start/Stop maintenance playbooks are ready
 
-- local logs
+- We send a 503 response with Retry-After header
 
-- cached queries linked to instance lifecycle
+- Web UI needs to adapt behaviour
+<br>
+<sub>
+(
+Error - 0
+Http failure response for https://dev-vkx9mwjirvv0dvz.raw-labs.com/raw/1/api/admin/repos: 0 Unknown Error
+)
+</sub>
+<br>
+- VScode needs to adapt behaviour
 
-- static configurations in 2 git repositories
 
 </Steps>
 
 ---
 
-## Where are we ?
+## IDLE repose instances / Cost Optim
 
 <Steps>
 
-- 3 EC2 instances
-  - prod
-  - staging
-  - testing
+- A lot of Repose instance are IDLE
 
-- retained and aggregated logs in AWS CloudWatch
+- We are able to determine for how long
 
-- healthcheck and alerting
-
-- daily back up for cached queries
-
-- templated configuratioon files in a single git repository
 
 </Steps>
 
 ---
 
-## What's next ? 
+## Repose start/stop 
 
 <Steps>
 
-- K8s
+- Advertise users that repose is going to sleep ( email / vscode notif ? )
 
-- More dedicated CI
+- Start repose instance after login event
 
-- Some QA
-
-- More metrics ( JVM , latency, ...)
-
+- Stop repose instance after X hour(s) idle
 
 </Steps>
 

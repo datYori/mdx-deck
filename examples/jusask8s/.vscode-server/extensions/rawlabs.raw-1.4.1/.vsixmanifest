@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
+		<Metadata>
+			<Identity Language="en-US" Id="raw" Version="1.4.1" Publisher="RAWLabs" />
+			<DisplayName>RAW Data API</DisplayName>
+			<Description xml:space="preserve">RAW Labs Visual Studio Code extension allows developers to create powerful APIs from multiple data sources in many formats</Description>
+			<Tags>raw labs,api,data sharing,rest,data,snippet,keybindings,rql,RAW Query Language,RQL,__ext_rql,__ext_RQL,__ext_rqlScratchpad,rnql,RAW Node Query Language,RNQL,__ext_rnql,rql2,RAW Query Language 2,RQL2,__ext_rql2,__ext_RQL2,__ext_rql2Scratchpad</Tags>
+			<Categories>Data Science,Programming Languages,Snippets,Testing,Visualization,Extension Packs</Categories>
+			<GalleryFlags>Public</GalleryFlags>
+			
+			<Properties>
+				<Property Id="Microsoft.VisualStudio.Code.Engine" Value="^1.63.0" />
+				<Property Id="Microsoft.VisualStudio.Code.ExtensionDependencies" Value="vscode.git" />
+				<Property Id="Microsoft.VisualStudio.Code.ExtensionPack" Value="redhat.vscode-yaml" />
+				<Property Id="Microsoft.VisualStudio.Code.ExtensionKind" Value="workspace" />
+				<Property Id="Microsoft.VisualStudio.Code.LocalizedLanguages" Value="" />
+				
+				
+				<Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/raw-labs/vscode.git" />
+				<Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/raw-labs/vscode.git" />
+				<Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/raw-labs/vscode.git" />
+				<Property Id="Microsoft.VisualStudio.Services.Links.Support" Value="https://github.com/raw-labs/vscode/issues" />
+				<Property Id="Microsoft.VisualStudio.Services.Links.Learn" Value="https://raw-labs.com/" />
+				
+				
+				<Property Id="Microsoft.VisualStudio.Services.GitHubFlavoredMarkdown" Value="true" />
+				
+				
+			</Properties>
+			<License>extension/LICENSE.txt</License>
+			<Icon>extension/resources/raw-logo.png</Icon>
+		</Metadata>
+		<Installation>
+			<InstallationTarget Id="Microsoft.VisualStudio.Code"/>
+		</Installation>
+		<Dependencies/>
+		<Assets>
+			<Asset Type="Microsoft.VisualStudio.Code.Manifest" Path="extension/package.json" Addressable="true" />
+			<Asset Type="Microsoft.VisualStudio.Services.Content.Details" Path="extension/README.md" Addressable="true" />
+<Asset Type="Microsoft.VisualStudio.Services.Content.Changelog" Path="extension/CHANGELOG.md" Addressable="true" />
+<Asset Type="Microsoft.VisualStudio.Services.Content.License" Path="extension/LICENSE.txt" Addressable="true" />
+<Asset Type="Microsoft.VisualStudio.Services.Icons.Default" Path="extension/resources/raw-logo.png" Addressable="true" />
+		</Assets>
+	</PackageManifest>

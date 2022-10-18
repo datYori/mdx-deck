@@ -1,0 +1,18 @@
+{
+    "Raw Select": {
+        "prefix": "select",
+        "body": [
+            "SELECT ${1:*} FROM READ(\"${2:source}\") WHERE ${3:condition}"
+        ],
+        "description": "Select statement"
+    },
+    "Raw Function": {
+        "prefix": "raw-function",
+        "body": [
+            "${1:functionName}(${2:functionArguments}) := {",
+            "",
+            "}"
+        ],
+        "description": "Define a function"
+    }
+}

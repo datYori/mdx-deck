@@ -1,0 +1,1029 @@
+{
+    "fileTypes": [
+        "rql2"
+    ],
+    "firstLineMatch": "^#!/.*\\b\\w*rql2\\b",
+    "foldingStartMarker": "/\\*\\*|\\{\\s*$",
+    "foldingStopMarker": "\\*\\*/|^\\s*\\}",
+    "keyEquivalent": "^~S",
+    "repository": {
+        "empty-parentheses": {
+            "match": "(\\(\\))",
+            "captures": {
+                "1": {
+                    "name": "meta.bracket.rql2"
+                }
+            },
+            "name": "meta.parentheses.rql2"
+        },
+        "functions": {
+            "begin": "((\\.)?([a-z,A-Z,0-9,_]+)(\\[.*\\])?\\()",
+            "end": "\\)",
+            "beginCaptures": {
+                "0": {
+                    "name": "support.function.rql2"
+                }
+            },
+            "endCaptures": {
+                "0": {
+                    "name": "support.function.rql2"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#code"
+                }
+            ]
+        },
+        "projections": {
+            "begin": "\\.",
+            "end": "([a-z,A-Z,0-9,_]+)",
+            "endCaptures": {
+                "0": {
+                    "name": "variable.parameter.rql2"
+                }
+            }
+        },
+        "imports": {
+            "end": "\n",
+            "begin": "\\b(import)\\s+",
+            "beginCaptures": {
+                "1": {
+                    "name": "keyword.other.import.rql2"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#comments"
+                },
+                {
+                    "match": "\\b([a-zA-Z:\/]*)\\s+\\b(as)\\s+\\b([a-zA-Z:\/]*)",
+                    "captures": {
+                        "1": {
+                            "name": "string.unquoted.shebang.rql2"
+                        },
+                        "2": {
+                            "name": "keyword.other.import.rql2"
+                        },
+                        "3": {
+                            "name": "entity.name.import.renamed-to.rql2"
+                        }
+                    },
+                    "name": "entity.name.class.import.rql2"
+                }
+            ],
+            "name": "meta.import.rql2"
+        },
+        "constants": {
+            "patterns": [
+                {
+                    "match": "\\b(false|null|true|int|in|rec|not|bool|string|byte|short|float|double|decimal|date|time|timestamp|interval|binary|void|record|list|generator|option|location|collection)\\b",
+                    "name": "constant.language.rql2"
+                },
+                {
+                    "match": "\\b(0[xX][0-9a-fA-F_]*)\\b",
+                    "name": "constant.numeric.rql2"
+                },
+                {
+                    "match": "\\b(([0-9][0-9_]*(\\.[0-9][0-9_]*)?)([eE](\\+|-)?[0-9][0-9_]*)?|[0-9][0-9_]*)[LlFfDd]?\\b",
+                    "name": "constant.numeric.rql2"
+                },
+                {
+                    "match": "(\\.[0-9][0-9_]*)([eE](\\+|-)?[0-9][0-9_]*)?[LlFfDd]?\\b",
+                    "name": "constant.numeric.rql2"
+                },
+                {
+                    "match": "\\b(this|super)\\b",
+                    "name": "variable.language.rql2"
+                }
+            ]
+        },
+        "script-header": {
+            "match": "^#!(.*)$",
+            "captures": {
+                "1": {
+                    "name": "string.unquoted.shebang.rql2"
+                }
+            },
+            "name": "comment.block.shebang.rql2"
+        },
+        "code": {
+            "patterns": [
+                {
+                    "include": "#comments"
+                },
+                {
+                    "include": "#strings"
+                },
+                {
+                    "include": "#functions"
+                },
+                {
+                    "include": "#projections"
+                },
+                {
+                    "include": "#keywords"
+                },
+                {
+                    "include": "#constants"
+                },
+                {
+                    "include": "#script-header"
+                },
+                {
+                    "include": "#declarations"
+                },
+                {
+                    "include": "#extension"
+                },
+                {
+                    "include": "#imports"
+                },
+                {
+                    "include": "#xml-literal"
+                },
+                {
+                    "include": "#rql2-symbol"
+                },
+                {
+                    "include": "#singleton-type"
+                },
+                {
+                    "include": "#inline"
+                },
+                {
+                    "include": "#rql2-quoted"
+                },
+                {
+                    "include": "#char-literal"
+                },
+                {
+                    "include": "#empty-parentheses"
+                },
+                {
+                    "include": "#parameter-list"
+                },
+                {
+                    "include": "#qualifiedClassName"
+                },
+                {
+                    "include": "#backQuotedVariable"
+                },
+                {
+                    "include": "#curly-braces"
+                },
+                {
+                    "include": "#meta-brackets"
+                },
+                {
+                    "include": "#meta-bounds"
+                },
+                {
+                    "include": "#meta-colons"
+                }
+            ]
+        },
+        "strings": {
+            "patterns": [
+                {
+                    "end": "\"\"\"(?!\")",
+                    "begin": "\"\"\"",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.string.begin.rql2"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "match": "\\\\\\\\|\\\\u[0-9A-Fa-f]{4}",
+                            "name": "constant.character.escape.rql2"
+                        }
+                    ],
+                    "endCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.string.end.rql2"
+                        }
+                    },
+                    "name": "string.quoted.triple.rql2"
+                },
+                {
+                    "begin": "\\b(raw)(\"\"\")",
+                    "end": "(\"\"\")(?!\")|\\$\n|(\\$[^\\$\"_{A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}])",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "keyword.interpolation.rql2"
+                        },
+                        "2": {
+                            "name": "string.quoted.triple.interpolated.rql2 punctuation.definition.string.begin.rql2"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "match": "\\$[\\$\"]",
+                            "name": "constant.character.escape.rql2"
+                        },
+                        {
+                            "include": "#string-interpolation"
+                        },
+                        {
+                            "match": ".",
+                            "name": "string.quoted.triple.interpolated.rql2"
+                        }
+                    ],
+                    "endCaptures": {
+                        "1": {
+                            "name": "string.quoted.triple.interpolated.rql2 punctuation.definition.string.end.rql2"
+                        },
+                        "2": {
+                            "name": "invalid.illegal.unrecognized-string-escape.rql2"
+                        }
+                    }
+                },
+                {
+                    "begin": "\\b((?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?))(\"\"\")",
+                    "end": "(\"\"\")(?!\")|\\$\n|(\\$[^\\$\"_{A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}])",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "keyword.interpolation.rql2"
+                        },
+                        "2": {
+                            "name": "string.quoted.triple.interpolated.rql2 punctuation.definition.string.begin.rql2"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "include": "#string-interpolation"
+                        },
+                        {
+                            "match": "\\\\\\\\|\\\\u[0-9A-Fa-f]{4}",
+                            "name": "constant.character.escape.rql2"
+                        },
+                        {
+                            "match": ".",
+                            "name": "string.quoted.triple.interpolated.rql2"
+                        }
+                    ],
+                    "endCaptures": {
+                        "1": {
+                            "name": "string.quoted.triple.interpolated.rql2 punctuation.definition.string.end.rql2"
+                        },
+                        "2": {
+                            "name": "invalid.illegal.unrecognized-string-escape.rql2"
+                        }
+                    }
+                },
+                {
+                    "end": "\"",
+                    "begin": "\"",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.string.begin.rql2"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "match": "\\\\(?:[btnfr\\\\\"']|[0-7]{1,3}|u[0-9A-Fa-f]{4})",
+                            "name": "constant.character.escape.rql2"
+                        },
+                        {
+                            "match": "\\\\.",
+                            "name": "invalid.illegal.unrecognized-string-escape.rql2"
+                        }
+                    ],
+                    "endCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.string.end.rql2"
+                        }
+                    },
+                    "name": "string.quoted.double.rql2"
+                },
+                {
+                    "begin": "\\b(raw)(\")",
+                    "end": "(\")|\\$\n|(\\$[^\\$\"_{A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}])",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "keyword.interpolation.rql2"
+                        },
+                        "2": {
+                            "name": "string.quoted.double.interpolated.rql2 punctuation.definition.string.begin.rql2"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "match": "\\$[\\$\"]",
+                            "name": "constant.character.escape.rql2"
+                        },
+                        {
+                            "include": "#string-interpolation"
+                        },
+                        {
+                            "match": ".",
+                            "name": "string.quoted.double.interpolated.rql2"
+                        }
+                    ],
+                    "endCaptures": {
+                        "1": {
+                            "name": "string.quoted.double.interpolated.rql2 punctuation.definition.string.end.rql2"
+                        },
+                        "2": {
+                            "name": "invalid.illegal.unrecognized-string-escape.rql2"
+                        }
+                    }
+                },
+                {
+                    "begin": "\\b((?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?))(\")",
+                    "end": "(\")|\\$\n|(\\$[^\\$\"_{A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}])",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "keyword.interpolation.rql2"
+                        },
+                        "2": {
+                            "name": "string.quoted.double.interpolated.rql2 punctuation.definition.string.begin.rql2"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "match": "\\$[\\$\"]",
+                            "name": "constant.character.escape.rql2"
+                        },
+                        {
+                            "include": "#string-interpolation"
+                        },
+                        {
+                            "match": "\\\\(?:[btnfr\\\\\"']|[0-7]{1,3}|u[0-9A-Fa-f]{4})",
+                            "name": "constant.character.escape.rql2"
+                        },
+                        {
+                            "match": "\\\\.",
+                            "name": "invalid.illegal.unrecognized-string-escape.rql2"
+                        },
+                        {
+                            "match": ".",
+                            "name": "string.quoted.double.interpolated.rql2"
+                        }
+                    ],
+                    "endCaptures": {
+                        "1": {
+                            "name": "string.quoted.double.interpolated.rql2 punctuation.definition.string.end.rql2"
+                        },
+                        "2": {
+                            "name": "invalid.illegal.unrecognized-string-escape.rql2"
+                        }
+                    }
+                }
+            ]
+        },
+        "string-interpolation": {
+            "patterns": [
+                {
+                    "name": "constant.character.escape.interpolation.rql2",
+                    "match": "\\$\\$"
+                },
+                {
+                    "name": "meta.template.expression.rql2",
+                    "match": "(\\$)([A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\p{Lo}\\p{Nl}\\p{Ll}0-9]*)",
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.definition.template-expression.begin.rql2"
+                        }
+                    }
+                },
+                {
+                    "name": "meta.template.expression.rql2",
+                    "begin": "\\$\\{",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.template-expression.begin.rql2"
+                        }
+                    },
+                    "end": "\\}",
+                    "endCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.template-expression.end.rql2"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "include": "#code"
+                        }
+                    ],
+                    "contentName": "meta.embedded.line.rql2"
+                }
+            ]
+        },
+        "xml-entity": {
+            "match": "(&)([:a-zA-Z_][:a-zA-Z0-9_.-]*|#[0-9]+|#x[0-9a-fA-F]+)(;)",
+            "captures": {
+                "1": {
+                    "name": "punctuation.definition.constant.xml"
+                },
+                "3": {
+                    "name": "punctuation.definition.constant.xml"
+                }
+            },
+            "name": "constant.character.entity.xml"
+        },
+        "xml-singlequotedString": {
+            "end": "'",
+            "begin": "'",
+            "beginCaptures": {
+                "0": {
+                    "name": "punctuation.definition.string.begin.xml"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#xml-entity"
+                }
+            ],
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.definition.string.end.xml"
+                }
+            },
+            "name": "string.quoted.single.xml"
+        },
+        "meta-colons": {
+            "patterns": [
+                {
+                    "match": "(?<!:):(?!:)",
+                    "name": "meta.colon.rql2"
+                }
+            ],
+            "comment": "For themes: Matching type colons"
+        },
+        "keywords": {
+            "patterns": [
+                {
+                    "match": "\\b(return|throw)\\b",
+                    "name": "keyword.control.flow.jump.rql2"
+                },
+                {
+                    "match": "\\b(classOf|isInstanceOf|asInstanceOf)\\b",
+                    "name": "support.function.type-of.rql2"
+                },
+                {
+                    "match": "\\b(else|if|then|do|while|for|yield|match|case|and|or)\\b",
+                    "name": "keyword.control.flow.rql2"
+                },
+                {
+                    "match": "^\\s*(end)\\s+(if|while|for|match)(?=\\s*(//.*|/\\*(?!.*\\*/\\s*\\S.*).*)?$)",
+                    "name": "keyword.control.flow.end.rql2"
+                },
+                {
+                    "match": "^\\s*(end)\\s+(let)(?=\\s*(//.*|/\\*(?!.*\\*/\\s*\\S.*).*)?$)",
+                    "name": "keyword.declaration.stable.end.rql2"
+                },
+                {
+                    "match": "^\\s*(end)\\s+(var)(?=\\s*(//.*|/\\*(?!.*\\*/\\s*\\S.*).*)?$)",
+                    "name": "keyword.declaration.volatile.end.rql2"
+                },
+                {
+                    "match": "^\\s*(end)\\s+(?:(new|extension)|([A-Z\\p{Lt}\\p{Lu}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?))(?=\\s*(//.*|/\\*(?!.*\\*/\\s*\\S.*).*)?$)",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.declaration.end.rql2"
+                        },
+                        "2": {
+                            "name": "keyword.declaration.end.rql2"
+                        },
+                        "3": {
+                            "name": "entity.name.type.declaration"
+                        }
+                    }
+                },
+                {
+                    "match": "\\b(catch|finally|try|goto)\\b",
+                    "name": "keyword.control.exception.rql2"
+                },
+                {
+                    "match": "^\\s*(end)\\s+(try)(?=\\s*(//.*|/\\*(?!.*\\*/\\s*\\S.*).*)?$)",
+                    "name": "keyword.control.exception.end.rql2"
+                },
+                {
+                    "match": "^\\s*(end)\\s+(`[^`]+`|(?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+))?(?=\\s*(//.*|/\\*(?!.*\\*/\\s*\\S.*).*)?$)",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.declaration.end.rql2"
+                        },
+                        "2": {
+                            "name": "entity.name.declaration"
+                        }
+                    }
+                },
+                {
+                    "match": "(<-|←|->|→|=>|⇒|\\?|\\:+|@|\\|)+",
+                    "name": "constant.language.rql2"
+                },
+                {
+                    "match": "(==?|!=|<=|>=|<>|<|>)",
+                    "name": "keyword.operator.comparison.rql2"
+                },
+                {
+                    "match": "(\\-|\\+|\\*|/(?![/*])|%|~)",
+                    "name": "keyword.operator.arithmetic.rql2"
+                },
+                {
+                    "match": "(?<![!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]|_)(!|&&|\\|\\|)(?![!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}])",
+                    "name": "keyword.operator.logical.rql2"
+                }
+            ]
+        },
+        "singleton-type": {
+            "match": "\\.(type)(?![A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|[0-9])",
+            "captures": {
+                "1": {
+                    "name": "keyword.type.rql2"
+                }
+            }
+        },
+        "rql2-quoted": {
+            "patterns": [
+                {
+                    "match": "['$]\\{(?!')",
+                    "name": "punctuation.section.block.begin.rql2"
+                },
+                {
+                    "match": "'\\[(?!')",
+                    "name": "meta.bracket.rql2"
+                }
+            ]
+        },
+        "xml-doublequotedString": {
+            "end": "\"",
+            "begin": "\"",
+            "beginCaptures": {
+                "0": {
+                    "name": "punctuation.definition.string.begin.xml"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#xml-entity"
+                }
+            ],
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.definition.string.end.xml"
+                }
+            },
+            "name": "string.quoted.double.xml"
+        },
+        "declarations": {
+            "patterns": [
+                {
+                    "match": "(?<!\\.)\\b(type)\\b\\s*(?!//|/\\*)((?:(?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)|`[^`]+`))?",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.declaration.rql2"
+                        },
+                        "2": {
+                            "name": "entity.name.type.declaration"
+                        }
+                    }
+                },
+                {
+                    "match": "\\b(?:(let))\\b\\s*(?!//|/\\*)(?=(?:(?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)|`[^`]+`)?\\()",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.declaration.stable.rql2"
+                        },
+                        "2": {
+                            "name": "keyword.declaration.volatile.rql2"
+                        }
+                    }
+                },
+                {
+                    "match": "\\b(?:(let))\\b\\s*(?!//|/\\*)(?:(?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)|`[^`]+`)(?=\\s*,)",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.declaration.stable.rql2"
+                        },
+                        "2": {
+                            "name": "keyword.declaration.volatile.rql2"
+                        }
+                    }
+                },
+                {
+                    "match": "\\b(?:(let))\\b\\s*(?!//|/\\*)((?:(?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)|`[^`]+`))?",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.declaration.stable.rql2"
+                        },
+                        "2": {
+                            "name": "keyword.declaration.volatile.rql2"
+                        },
+                        "3": {
+                            "name": "variable.other.declaration.rql2"
+                        }
+                    }
+                },
+                {
+                    "match": "\\b(package|library)\\s+(object)\\b\\s*(?!//|/\\*)((?:(?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)|`[^`]+`))?",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.other.scoping.rql2"
+                        },
+                        "2": {
+                            "name": "keyword.declaration.rql2"
+                        },
+                        "3": {
+                            "name": "entity.name.class.declaration"
+                        }
+                    }
+                },
+                {
+                    "end": "(?<=[\\n;])",
+                    "begin": "\\b(package|library)\\s+",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "keyword.other.import.rql2"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "include": "#comments"
+                        },
+                        {
+                            "match": "(`[^`]+`|(?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+))",
+                            "name": "entity.name.package.rql2"
+                        },
+                        {
+                            "match": "\\.",
+                            "name": "punctuation.definition.package"
+                        }
+                    ],
+                    "name": "meta.package.rql2"
+                }
+            ]
+        },
+        "char-literal": {
+            "end": "'|$",
+            "begin": "'",
+            "beginCaptures": {
+                "0": {
+                    "name": "punctuation.definition.character.begin.rql2"
+                }
+            },
+            "patterns": [
+                {
+                    "match": "\\\\(?:[btnfr\\\\\"']|[0-7]{1,3}|u[0-9A-Fa-f]{4})",
+                    "name": "constant.character.escape.rql2"
+                },
+                {
+                    "match": "\\\\.",
+                    "name": "invalid.illegal.unrecognized-character-escape.rql2"
+                },
+                {
+                    "match": "[^']{2,}",
+                    "name": "invalid.illegal.character-literal-too-long"
+                },
+                {
+                    "match": "(?<!')[^']",
+                    "name": "invalid.illegal.character-literal-too-long"
+                }
+            ],
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.definition.character.end.rql2"
+                }
+            },
+            "name": "string.quoted.other constant.character.literal.rql2"
+        },
+        "rql2-symbol": {
+            "match": "(?>'(?:[A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?|[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+))(?!')",
+            "name": "constant.other.symbol.rql2"
+        },
+        "curly-braces": {
+            "begin": "\\{",
+            "end": "\\}",
+            "beginCaptures": {
+                "0": {
+                    "name": "punctuation.section.block.begin.rql2"
+                }
+            },
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.section.block.end.rql2"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#code"
+                }
+            ]
+        },
+        "meta-brackets": {
+            "patterns": [
+                {
+                    "match": "\\{",
+                    "comment": "The punctuation.section.*.begin is needed for return snippet in source bundle",
+                    "name": "punctuation.section.block.begin.rql2"
+                },
+                {
+                    "match": "\\}",
+                    "comment": "The punctuation.section.*.end is needed for return snippet in source bundle",
+                    "name": "punctuation.section.block.end.rql2"
+                },
+                {
+                    "match": "{|}|\\(|\\)|\\[|\\]",
+                    "name": "meta.bracket.rql2"
+                }
+            ],
+            "comment": "For themes: Brackets look nice when colored."
+        },
+        "qualifiedClassName": {
+            "match": "(\\b([A-Z][\\w]*)(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?)",
+            "captures": {
+                "1": {
+                    "name": "entity.name.class"
+                }
+            }
+        },
+        "backQuotedVariable": {
+            "match": "`[^`]+`"
+        },
+        "meta-bounds": {
+            "match": "<%|=:=|<:<|<%<|>:|<:",
+            "comment": "For themes: Matching view bounds",
+            "name": "meta.bounds.rql2"
+        },
+        "comments": {
+            "patterns": [
+                {
+                    "include": "#block-comments"
+                },
+                {
+                    "end": "(?!\\G)",
+                    "begin": "(^[ \\t]+)?(?=//)",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "punctuation.whitespace.comment.leading.rql2"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "end": "\\n",
+                            "begin": "//",
+                            "beginCaptures": {
+                                "0": {
+                                    "name": "punctuation.definition.comment.rql2"
+                                }
+                            },
+                            "name": "comment.line.double-slash.rql2"
+                        }
+                    ]
+                }
+            ]
+        },
+        "block-comments": {
+            "patterns": [
+                {
+                    "match": "/\\*\\*/",
+                    "captures": {
+                        "0": {
+                            "name": "punctuation.definition.comment.rql2"
+                        }
+                    },
+                    "name": "comment.block.empty.rql2"
+                },
+                {
+                    "end": "\\*/",
+                    "begin": "^\\s*(/\\*\\*)(?!/)",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.comment.rql2"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "match": "(@param)\\s+(\\S+)",
+                            "captures": {
+                                "1": {
+                                    "name": "keyword.other.documentation.rql2doc.rql2"
+                                },
+                                "2": {
+                                    "name": "variable.parameter.rql2"
+                                }
+                            }
+                        },
+                        {
+                            "match": "(@(?:tparam|throws))\\s+(\\S+)",
+                            "captures": {
+                                "1": {
+                                    "name": "keyword.other.documentation.rql2doc.rql2"
+                                },
+                                "2": {
+                                    "name": "entity.name.class"
+                                }
+                            }
+                        },
+                        {
+                            "match": "@(return|see|note|example|constructor|usecase|author|version|since|todo|deprecated|migration|define|inheritdoc)\\b",
+                            "name": "keyword.other.documentation.rql2doc.rql2"
+                        },
+                        {
+                            "match": "(\\[\\[)([^\\]]+)(\\]\\])",
+                            "captures": {
+                                "1": {
+                                    "name": "punctuation.definition.documentation.link.rql2"
+                                },
+                                "2": {
+                                    "name": "string.other.link.title.markdown"
+                                },
+                                "3": {
+                                    "name": "punctuation.definition.documentation.link.rql2"
+                                }
+                            }
+                        },
+                        {
+                            "include": "#block-comments"
+                        }
+                    ],
+                    "endCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.comment.rql2"
+                        }
+                    },
+                    "name": "comment.block.documentation.rql2"
+                },
+                {
+                    "end": "\\*/",
+                    "begin": "/\\*",
+                    "captures": {
+                        "0": {
+                            "name": "punctuation.definition.comment.rql2"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "include": "#block-comments"
+                        }
+                    ],
+                    "name": "comment.block.rql2"
+                }
+            ]
+        },
+        "xml-embedded-content": {
+            "patterns": [
+                {
+                    "end": "}",
+                    "begin": "{",
+                    "patterns": [
+                        {
+                            "include": "#code"
+                        }
+                    ],
+                    "captures": {
+                        "0": {
+                            "name": "meta.bracket.rql2"
+                        }
+                    },
+                    "name": "meta.source.embedded.rql2"
+                },
+                {
+                    "match": " (?:([-_a-zA-Z0-9]+)((:)))?([_a-zA-Z-]+)=",
+                    "captures": {
+                        "1": {
+                            "name": "entity.other.attribute-name.namespace.xml"
+                        },
+                        "2": {
+                            "name": "entity.other.attribute-name.xml"
+                        },
+                        "3": {
+                            "name": "punctuation.separator.namespace.xml"
+                        },
+                        "4": {
+                            "name": "entity.other.attribute-name.localname.xml"
+                        }
+                    }
+                },
+                {
+                    "include": "#xml-doublequotedString"
+                },
+                {
+                    "include": "#xml-singlequotedString"
+                }
+            ]
+        },
+        "extension": {
+            "patterns": [
+                {
+                    "match": "^\\s*(extension)\\s+(?=[\\[\\(])",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.declaration.rql2"
+                        }
+                    }
+                }
+            ]
+        },
+        "parameter-list": {
+            "patterns": [
+                {
+                    "match": "(?<=[^\\._$a-zA-Z0-9])(`[^`]+`|[_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}][A-Z\\p{Lt}\\p{Lu}_a-z\\$\\p{Lo}\\p{Nl}\\p{Ll}0-9]*(?:(?<=_)[!#%&*+\\-\\/:<>=?@^|~\\p{Sm}\\p{So}]+)?)\\s*(:)\\s+",
+                    "captures": {
+                        "1": {
+                            "name": "variable.parameter.rql2"
+                        },
+                        "2": {
+                            "name": "meta.colon.rql2"
+                        }
+                    }
+                }
+            ]
+        },
+        "xml-literal": {
+            "patterns": [
+                {
+                    "end": "(>(<))/(?:([-_a-zA-Z0-9]+)((:)))?([-_a-zA-Z0-9:]*[_a-zA-Z0-9])(>)",
+                    "begin": "(<)((?:([_a-zA-Z0-9][_a-zA-Z0-9]*)((:)))?([_a-zA-Z0-9][-_a-zA-Z0-9:]*))(?=(\\s[^>]*)?></\\2>)",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.xml"
+                        },
+                        "3": {
+                            "name": "entity.name.tag.namespace.xml"
+                        },
+                        "4": {
+                            "name": "entity.name.tag.xml"
+                        },
+                        "5": {
+                            "name": "punctuation.separator.namespace.xml"
+                        },
+                        "6": {
+                            "name": "entity.name.tag.localname.xml"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "include": "#xml-embedded-content"
+                        }
+                    ],
+                    "comment": "We do not allow a tag name to start with a - since this would likely conflict with the <- operator. This is not very common for tag names anyway.  Also code such as -- if (val <val2 || val> val3) will falsly be recognized as an xml tag.  The solution is to put a space on either side of the comparison operator",
+                    "endCaptures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.xml"
+                        },
+                        "2": {
+                            "name": "meta.scope.between-tag-pair.xml"
+                        },
+                        "3": {
+                            "name": "entity.name.tag.namespace.xml"
+                        },
+                        "4": {
+                            "name": "entity.name.tag.xml"
+                        },
+                        "5": {
+                            "name": "punctuation.separator.namespace.xml"
+                        },
+                        "6": {
+                            "name": "entity.name.tag.localname.xml"
+                        },
+                        "7": {
+                            "name": "punctuation.definition.tag.xml"
+                        }
+                    },
+                    "name": "meta.tag.no-content.xml"
+                },
+                {
+                    "end": "(/?>)",
+                    "begin": "(</?)(?:([_a-zA-Z0-9][-_a-zA-Z0-9]*)((:)))?([_a-zA-Z0-9][-_a-zA-Z0-9:]*)(?=[^>]*?>)",
+                    "patterns": [
+                        {
+                            "include": "#xml-embedded-content"
+                        }
+                    ],
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.definition.tag.xml"
+                        },
+                        "2": {
+                            "name": "entity.name.tag.namespace.xml"
+                        },
+                        "3": {
+                            "name": "entity.name.tag.xml"
+                        },
+                        "4": {
+                            "name": "punctuation.separator.namespace.xml"
+                        },
+                        "5": {
+                            "name": "entity.name.tag.localname.xml"
+                        }
+                    },
+                    "name": "meta.tag.xml"
+                },
+                {
+                    "include": "#xml-entity"
+                }
+            ]
+        }
+    },
+    "patterns": [
+        {
+            "include": "#code"
+        }
+    ],
+    "name": "rql2",
+    "scopeName": "source.rql2"
+}

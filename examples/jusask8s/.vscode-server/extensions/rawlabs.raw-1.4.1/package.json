@@ -1,0 +1,448 @@
+{
+	"name": "raw",
+	"publisher": "RAWLabs",
+	"readme": "https://github.com/raw-labs/vscode/blob/main/README.md",
+	"license": "https://github.com/raw-labs/vscode/blob/main/LICENSE",
+	"homepage": "https://raw-labs.com/",
+	"private": true,
+	"keywords": [
+		"raw labs",
+		"api",
+		"data sharing",
+		"rest",
+		"data"
+	],
+	"repository": {
+		"url": "https://github.com/raw-labs/vscode",
+		"directory": "https://github.com/raw-labs/vscode"
+	},
+	"extensionPack": [
+		"redhat.vscode-yaml"
+	],
+	"extensionDependencies": [
+		"vscode.git"
+	],
+	"displayName": "RAW Data API",
+	"description": "RAW Labs Visual Studio Code extension allows developers to create powerful APIs from multiple data sources in many formats",
+	"version": "1.4.1",
+	"engines": {
+		"vscode": "^1.63.0"
+	},
+	"categories": [
+		"Data Science",
+		"Programming Languages",
+		"Snippets",
+		"Testing",
+		"Visualization",
+		"Extension Packs"
+	],
+	"activationEvents": [
+		"onWalkthrough:rqlHelloWorldWalkthrough",
+		"onWebviewPanel:raw.startPagePanel",
+		"onView:raw.activityBar",
+		"onView:raw.dataVisualizer",
+		"onView:raw.visualEditor",
+		"onCommand:raw.scratchpad.openScratchpad.rql",
+		"onCommand:raw.scratchpad.runCode.rql",
+		"onCommand:raw.scratchpad.openScratchpad.rql2",
+		"onCommand:raw.scratchpad.runCode.rql2",
+		"onFileSystem:vfsScheme",
+		"onLanguage:rql",
+		"onLanguage:rql2",
+		"workspaceContains:**/.raw-demo"
+	],
+	"icon": "resources/raw-logo.png",
+	"main": "./dist/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "raw.showStartPage",
+				"title": "RAW - Show Start Page",
+				"icon": "$(preview)",
+				"enablement": "!RAWLabs.raw.isDemo"
+			},
+			{
+				"command": "raw.scratchpad.openScratchpad.rql",
+				"title": "RAW - Open RQL Scratchpad",
+				"icon": "$(file-code)",
+				"enablement": "!RAWLabs.raw.isDemo"
+			},
+			{
+				"command": "raw.scratchpad.openScratchpad.rql2",
+				"title": "RAW - Open RQL2 Scratchpad",
+				"icon": "$(file-code)"
+			},
+			{
+				"command": "raw.yaml.runYamlFile",
+				"title": "RAW - Show Output Data",
+				"icon": "$(output)",
+				"enablement": "!RAWLabs.raw.isDemo"
+			},
+			{
+				"command": "raw.scratchpad.runCode.rql",
+				"title": "RAW - Run RQL Scratchpad Code",
+				"icon": "$(debug-start)",
+				"enablement": "!RAWLabs.raw.isDemo"
+			},
+			{
+				"command": "raw.scratchpad.runCode.rql2",
+				"title": "RAW - Run RQL2 Scratchpad Code",
+				"icon": "$(debug-start)"
+			},
+			{
+				"command": "raw.test.showResultData",
+				"title": "RAW - Fetch Data",
+				"icon": "$(debug-start)"
+			},
+			{
+				"command": "raw.auth.signOut",
+				"title": "RAW - SignOut",
+				"enablement": "!RAWLabs.raw.isDemo"
+			}
+		],
+		"walkthroughs": [
+			{
+				"id": "rqlHelloWorldWalkthrough",
+				"title": "Getting started with RAW Labs",
+				"description": "Run your first query and expose it as an endpoint",
+				"when": "workspacePlatform != webworker && !RAWLabs.raw.isDemo",
+				"steps": [
+					{
+						"id": "rqlWalkthrough.Login",
+						"title": "Login to RAW",
+						"media": {
+							"markdown": "./resources/walkthrough/hello-world/login.md"
+						},
+						"when": ""
+					},
+					{
+						"id": "rqlWalkthrough.cloneRepo",
+						"title": "Clone the 'Hello World' repository",
+						"media": {
+							"markdown": "./resources/walkthrough/hello-world/clone-repo.md"
+						},
+						"when": ""
+					},
+					{
+						"id": "rqlWalkthrough.grantPermissions",
+						"title": "Grant RAW permissions to read the 'Hello World' repository",
+						"media": {
+							"markdown": "./resources/walkthrough/hello-world/grant-permission.md"
+						},
+						"when": ""
+					},
+					{
+						"id": "rqlWalkthrough.testAPI",
+						"title": "Test the 'Hello World' API",
+						"media": {
+							"markdown": "./resources/walkthrough/hello-world/test-api.md"
+						},
+						"when": ""
+					},
+					{
+						"id": "rqlWalkthrough.learnMore",
+						"title": "Learn more ...",
+						"media": {
+							"markdown": "./resources/walkthrough/hello-world/learn-more.md"
+						},
+						"when": ""
+					}
+				]
+			}
+		],
+		"keybindings": [
+			{
+				"command": "raw.scratchpad.runCode.rql",
+				"key": "F8",
+				"when": "resourceExtname == .rqlScratchpad && RAWLabs.raw.correctWorkspaceState && !RAWLabs.raw.isDemo"
+			},
+			{
+				"command": "raw.scratchpad.runCode.rql2",
+				"key": "F8",
+				"when": "resourceExtname == .rql2Scratchpad && RAWLabs.raw.correctWorkspaceState && !RAWLabs.raw.isDemo"
+			},
+			{
+				"command": "raw.scratchpad.runCode.rql2",
+				"key": "F8",
+				"when": "resourceExtname == .rql2Scratchpad && RAWLabs.raw.isDemo"
+			}
+		],
+		"configuration": [
+			{
+				"title": "RAW",
+				"type": "object",
+				"properties": {
+					"raw.environment": {
+						"type": "string",
+						"default": "prod",
+						"enum": [
+							"prod",
+							"e2e",
+							"integration",
+							"testing"
+						],
+						"enumDescriptions": [
+							"Production environment",
+							"End to End Testing Environment",
+							"Integration Environment",
+							"Testing Environment"
+						],
+						"description": "Against which environment the code will run (production by default)",
+						"title": "Environment"
+					}
+				}
+			}
+		],
+		"languages": [
+			{
+				"id": "rql",
+				"aliases": [
+					"RAW Query Language",
+					"RQL"
+				],
+				"extensions": [
+					".rql",
+					".RQL",
+					".rqlScratchpad"
+				],
+				"configuration": "./configs/rql-configuration.json",
+				"icon": {
+					"dark": "resources/rql.svg",
+					"light": "resources/rql.svg"
+				}
+			},
+			{
+				"id": "rnql",
+				"aliases": [
+					"RAW Node Query Language",
+					"RNQL"
+				],
+				"extensions": [
+					".rnql"
+				],
+				"icon": {
+					"dark": "resources/rql.svg",
+					"light": "resources/rql.svg"
+				}
+			},
+			{
+				"id": "rql2",
+				"aliases": [
+					"RAW Query Language 2",
+					"RQL2"
+				],
+				"extensions": [
+					".rql2",
+					".RQL2",
+					"rql2Scratchpad"
+				],
+				"configuration": "./configs/rql2-configuration.json",
+				"icon": {
+					"dark": "resources/rql2.svg",
+					"light": "resources/rql2.svg"
+				}
+			}
+		],
+		"grammars": [
+			{
+				"language": "rql",
+				"scopeName": "source.rql",
+				"path": "./syntaxes/rql.tmGrammar.json"
+			},
+			{
+				"language": "rql2",
+				"scopeName": "source.rql2",
+				"path": "./syntaxes/rql2.tmGrammar.json"
+			}
+		],
+		"snippets": [
+			{
+				"language": "yaml",
+				"path": "./snipets/rawYamlSnipets.json"
+			},
+			{
+				"language": "rql",
+				"path": "./snipets/rqlSnipets.json"
+			}
+		],
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "rawActivityBar",
+					"title": "RAW Labs",
+					"icon": "resources/logo-raw.svg"
+				}
+			],
+			"panel": [
+				{
+					"id": "rawDataVisualizer",
+					"title": "Data Preview",
+					"icon": "resources/logo-raw.svg"
+				}
+			]
+		},
+		"views": {
+			"rawActivityBar": [
+				{
+					"type": "webview",
+					"id": "raw.activityBar",
+					"name": "RAW Activity",
+					"visibility": "visible"
+				},
+				{
+					"type": "webview",
+					"id": "raw.queryProperties",
+					"name": "RAW Query Properties",
+					"visibility": "visible",
+					"when": "RAWLabs.raw.correctWorkspaceState || RAWLabs.raw.isDemo"
+				}
+			],
+			"rawDataVisualizer": [
+				{
+					"type": "webview",
+					"id": "raw.dataVisualizer",
+					"name": "Data Preview",
+					"visibility": "visible"
+				}
+			]
+		},
+		"menus": {
+			"editor/context": [
+				{
+					"command": "raw.scratchpad.runCode.rql",
+					"when": "resourceExtname == .rqlScratchpad && RAWLabs.raw.correctWorkspaceState",
+					"group": "navigation"
+				},
+				{
+					"command": "raw.scratchpad.runCode.rql2",
+					"when": "resourceExtname == .rql2Scratchpad && RAWLabs.raw.correctWorkspaceState && !RAWLabs.raw.isDemo",
+					"group": "navigation"
+				},
+				{
+					"command": "raw.scratchpad.runCode.rql2",
+					"when": "resourceExtname == .rql2Scratchpad && RAWLabs.raw.isDemo",
+					"group": "navigation"
+				}
+			],
+			"editor/title": [
+				{
+					"command": "raw.scratchpad.runCode.rql",
+					"when": "resourceExtname == .rqlScratchpad && RAWLabs.raw.correctWorkspaceState",
+					"group": "navigation"
+				},
+				{
+					"command": "raw.scratchpad.runCode.rql2",
+					"when": "resourceExtname == .rql2Scratchpad && RAWLabs.raw.correctWorkspaceState && !RAWLabs.raw.isDemo",
+					"group": "navigation"
+				},
+				{
+					"command": "raw.scratchpad.runCode.rql2",
+					"when": "resourceExtname == .rql2Scratchpad && RAWLabs.raw.isDemo",
+					"group": "navigation"
+				}
+			],
+			"testing/item/context": [
+				{
+					"command": "raw.yaml.runYamlFile",
+					"group": "inline",
+					"when": "RAWLabs.raw.correctWorkspaceState && !RAWLabs.raw.isDemo"
+				}
+			]
+		},
+		"customEditors": [
+			{
+				"viewType": "raw.visualEditor",
+				"displayName": "RAW Visual Editor",
+				"selector": [
+					{
+						"filenamePattern": "*.rnql"
+					}
+				]
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "yarn package",
+		"compile": "parallel-webpack --mode development",
+		"watch": "webpack --mode development --watch",
+		"package": "webpack --mode production --devtool hidden-source-map",
+		"compile-tests": "tsc -p . --outDir out",
+		"watch-tests": "tsc -p . -w --outDir out",
+		"pretest": "yarn compile-tests && yarn compile && yarn lint",
+		"preci-test": "yarn lint",
+		"lint": "eslint src --ext ts",
+		"test": "node ./out/test/runTest.js",
+		"generate-api": "openapi-generator-cli generate --generator-key raw-generator",
+		"ci-test": "node ./out/test/runTest.js",
+		"precompile": "python3 ./src/languages/rql/documentation/generate_docs.py"
+	},
+	"devDependencies": {
+		"@types/fs-extra": "^9.0.13",
+		"@types/glob": "^7.1.4",
+		"@types/js-yaml": "^4.0.5",
+		"@types/mkdirp": "^1.0.2",
+		"@types/mocha": "^9.0.0",
+		"@types/node": "14.x",
+		"@types/react": "^18.0.13",
+		"@types/react-copy-to-clipboard": "^5.0.2",
+		"@types/react-dom": "^18.0.5",
+		"@types/rimraf": "^3.0.2",
+		"@types/vscode": "^1.62.0",
+		"@typescript-eslint/eslint-plugin": "^5.1.0",
+		"@typescript-eslint/parser": "^5.1.0",
+		"@vscode/test-electron": "^1.6.2",
+		"css-loader": "^6.6.0",
+		"eslint": "^8.1.0",
+		"eslint-plugin-react": "^7.29.4",
+		"eslint-plugin-react-hooks": "^4.6.0",
+		"fork-ts-checker-webpack-plugin": "^7.2.11",
+		"glob": "^7.1.7",
+		"mocha": "^9.1.3",
+		"react-router-dom": "^6.2.1",
+		"should": "^13.2.3",
+		"style-loader": "^3.3.1",
+		"ts-loader": "^9.2.5",
+		"typescript": "^4.4.4",
+		"webpack": "^5.52.1",
+		"webpack-cli": "^4.8.0"
+	},
+	"dependencies": {
+		"@ant-design/icons": "^4.7.0",
+		"@openapitools/openapi-generator-cli": "^2.5.1",
+		"antd": "^4.21.5",
+		"axios": "^0.24.0",
+		"extract-zip": "^2.0.1",
+		"fs-extra": "^10.0.1",
+		"git-config-path": "^2.0.0",
+		"isomorphic-git": "^1.10.2",
+		"js-yaml": "^4.1.0",
+		"jwt-decode": "^3.1.2",
+		"less": "^4.1.2",
+		"less-loader": "^10.2.0",
+		"mkdirp": "^1.0.4",
+		"openid-client": "^5.1.8",
+		"parallel-webpack": "^2.6.0",
+		"parse-git-config": "^3.0.0",
+		"prism-react-renderer": "^1.3.5",
+		"react": "^18.1.0",
+		"react-dom": "^18.1.0",
+		"react-flow-renderer": "^10.3.8",
+		"react-infinite-scroll-component": "^6.1.0",
+		"react-json-view": "^1.21.3",
+		"rimraf": "^3.0.2",
+		"ts-debounce": "^4.0.0",
+		"usehooks-ts": "^2.6.0",
+		"vsce": "^2.10.0",
+		"vscode-extension-tester": "^4.3.0",
+		"webcola": "^3.4.0"
+	},
+	"__metadata": {
+		"id": "b5ea03af-3339-4508-91d0-12841122eee6",
+		"publisherDisplayName": "RAW Labs",
+		"publisherId": "195b8fe4-cba6-4f5b-8c05-6b1c87b31681",
+		"isPreReleaseVersion": false,
+		"preRelease": false,
+		"isApplicationScoped": false,
+		"installedTimestamp": 1663156341381
+	}
+}

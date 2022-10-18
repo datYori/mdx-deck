@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="72"
+   height="52"
+   viewBox="0 0 72 52"
+   fill="none"
+   version="1.1"
+   id="svg55"
+   sodipodi:docname="rql.svg"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs59">
+    <rect
+       x="17.564835"
+       y="16.856503"
+       width="35.141783"
+       height="23.885561"
+       id="rect55444" />
+  </defs>
+  <sodipodi:namedview
+     id="namedview57"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="11.221154"
+     inkscape:cx="49.014567"
+     inkscape:cy="17.689803"
+     inkscape:window-width="2560"
+     inkscape:window-height="1380"
+     inkscape:window-x="0"
+     inkscape:window-y="32"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg55"
+     inkscape:snap-text-baseline="true" />
+  <path
+     id="path53"
+     style="fill:#cd2023;fill-opacity:1"
+     d="m 21.1202,20.2992 c 0.9056,0.2205 1.6524,0.7559 2.2403,1.6063 0.572,0.8504 0.858,2.2205 0.858,4.0945 0,1.7165 -0.2066,2.8661 -0.6038,3.4488 -0.4131,0.5827 -1.2075,0.9449 -2.4151,1.0551 1.0804,0.2835 1.8272,0.6615 2.1927,1.1339 0.3654,0.4724 0.6037,0.8976 0.6991,1.3071 0.0747,0.3705 0.1214,1.3409 0.1266,2.9374 L 24.2185,42 h -5.0844 v -7.3228 c 0,-1.1811 -0.0954,-1.9055 -0.2701,-2.189 C 18.6892,32.2047 18.2284,32.063 17.4816,32.063 V 42 H 12 V 20 h 3.8769 c 2.5739,0 4.3217,0.0945 5.2433,0.2992 z M 35.7855,20 l 3.146,22 h -5.6088 l -0.286,-3.9528 H 31.0506 L 30.7647,42 h -5.6723 l 2.7805,-22 z m 7.8332,0 0.5879,7.685 0.5561,7.4331 C 44.9692,31.2756 45.4777,26.2205 46.2721,20 h 5.6723 c 0.0082,0.0833 0.0188,0.1963 0.0317,0.3388 l 0.021,0.236 c 0.095,1.0757 0.2789,3.3068 0.5352,6.685 l 0.619,8.3768 0.1136,-1.769 C 53.5851,29.158 54.0558,24.5354 54.6773,20 H 60 L 57.569,42 H 50.7368 C 50.1172,38.6142 49.5611,34.7717 49.0685,30.4409 48.8461,32.2992 48.3376,36.1575 47.5432,42 H 40.7587 L 38.2959,20 Z m -11.5671,4.8819 c -0.3457,2.7112 -0.6068,4.9515 -0.7917,6.725 l -0.096,0.9484 c -0.0587,0.5995 -0.1069,1.1335 -0.145,1.6022 h 1.859 c -0.2543,-2.4882 -0.5244,-5.5906 -0.8263,-9.2756 z m -14.57,-1.1339 v 4.8977 c 0.6197,0 1.0328,-0.0788 1.287,-0.2677 0.2384,-0.1733 0.3655,-0.7402 0.3655,-1.7166 v -1.2126 c 0,-0.6929 -0.1271,-1.1496 -0.3496,-1.3701 C 18.5462,23.8583 18.1013,23.748 17.4816,23.748 Z M 61.5,16.4442 C 59.3457,7.02918 50.8457,0 40.7037,0 33.6728,0 27.4383,3.37082 23.5556,8.57694 21.2222,8.61976 18.9877,9.09694 16.9568,9.95341 10.537,12.6452 6.01235,18.9647 6.01235,26.312 v 0.2325 C 2.37654,29.0588 0,33.2555 0,37.9967 0,45.7355 6.33333,52 14.142,52 H 53.0679 C 63.5062,52 72,43.6127 72,33.2372 72,25.8899 67.716,19.5275 61.5,16.4442 Z" />
+  <rect
+     style="fill:#cd2023;fill-opacity:1"
+     id="rect14122"
+     width="51.592896"
+     height="25.632471"
+     x="9.5615444"
+     y="18.675049" />
+  <text
+     xml:space="preserve"
+     id="text55442"
+     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:5.33333px;line-height:1.25;font-family:Cantarell;-inkscape-font-specification:'Cantarell Bold';white-space:pre;shape-inside:url(#rect55444);fill:#ffffff"
+     transform="matrix(4.9703302,0,0,5.2223704,-75.566885,-74.026218)"><tspan
+       x="17.564453"
+       y="21.646819"
+       id="tspan100798">RQL</tspan></text>
+</svg>
