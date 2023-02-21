@@ -14,7 +14,7 @@ import {
 
 </Image>
 
-# CI Tier tests
+# Contained Pipelines
 
 ---
 
@@ -22,33 +22,16 @@ import {
 
 <Steps>
 
-- Engine CI (~ 2 hours )
-<sub>
- running for every PR modifying engine related code
-</sub>
+| Name                            	| Operator 	|  Host type 	| Docker Image                          	|
+|---------------------------------	|----------	|:----------:	|---------------------------------------	|
+| CI Engine Tier1 Tests           	| Jenkins  	| OnPrem/EC2 	| raw-scala-runner:buster_2.12.15_1.6.2 	|
+| CI Engine Tier2 Scala Tests     	| Jenkins  	| OnPrem/EC2 	| raw-scala-runner:buster_2.12.15_1.6.2 	|
+| CI Repose                       	| Jenkins  	| OnPrem/EC2 	| raw-scala-runner:buster_2.12.15_1.6.2 	|
+| CI Truffle Executor Scala Tests 	| Jenkins  	| OnPrem/EC2 	|                                       	|
+|                                 	|          	|            	|                                       	|
+|                                 	|          	|            	|                                       	|
 
-- Minikube tests (~ 1 hour )
-<sub>
- running for every PR modifying engine related code
-</sub>
-
-- Repose CI (~ 20 min )
-<sub>
- running for every PR modifying repose related code
-</sub>
-
-- Miscellaneous CI
-<sub>
-<ul>
-<li>Base Docker Images</li>
-<li>Docs</li>
-<li>UI</li>
-<li>Versioner</li>
-<li>VSCode</li>
-</ul>
-</sub>
-
-</Steps>
+</Steps>  
 
 ---
 
