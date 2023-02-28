@@ -18,103 +18,129 @@ import {
 
 ---
 
-## What we have
+## Why
 
 <Steps>
 
-| Name                            	| Operator 	|  Host type 	| Docker Image                          	|
-|---------------------------------	|----------	|:----------:	|---------------------------------------	|
-| CI Engine Tier1 Tests           	| Jenkins  	| OnPrem/EC2 	| raw-scala-runner:buster_2.12.15_1.6.2 	|
-| CI Engine Tier2 Scala Tests     	| Jenkins  	| OnPrem/EC2 	| raw-scala-runner:buster_2.12.15_1.6.2 	|
-| CI Repose                       	| Jenkins  	| OnPrem/EC2 	| raw-scala-runner:buster_2.12.15_1.6.2 	|
-| CI Truffle Executor Scala Tests 	| Jenkins  	| OnPrem/EC2 	|                                       	|
-|                                 	|          	|            	|                                       	|
-|                                 	|          	|            	|                                       	|
+- Reproductible/Deterministic build and test env
+
+- Isolated runs
+
+- Easier host maintenance
 
 </Steps>  
 
 ---
 
-## What we want 
+## Which
+
+- CI Engine Tier1 Tests
+
+- CI Engine Tier2 Scala Tests
+
+- CI Repose
+
+- CI Truffle Executor Scala Tests
+
+- Docs CI/CD
+
+- Scheduled master state
+
+---
+
+## Images
 
 <Steps>
 
-- Tier1 Engine CI (~ 10  min )
-<sub>
- running for every PR modifying engine related code
-</sub>
-
-- Tier2 Engine Tests (~ 2 hours )
+- raw-scala-runner:buster_jdk-11.0.16.8_hadoop3.3.0_spark3.1.1_scala2.12.15_sbt1.6.2
 <sub>
 <ul>
-<li>running frequently against main branch state</li>
-<li>running On-Demand from a PR state</li>
+<li>CI Engine Tier1 Tests</li>
+<li>CI ENgine Tier2 Scala Tests</li>
+<li>CI Repose</li>
+<li>Scheduled master state</li>
 </ul>
 </sub>
 
-- Repose CI (~ 20 min )
+- raw-scala-runner:ol8_java17_gvm22.3.0_scala2.12.15_sbt1.6.2
 <sub>
- running for every PR modifying repose related code
+CI Truffle Executor Scala Tests
 </sub>
 
-- Miscellaneous CI
+- raw-docs:16-slim
 <sub>
-<ul>
-<li>Base Docker Images</li>
-<li>Compose Docker Images</li>
-<li>Docs</li>
-<li>UI</li>
-<li>Versioner</li>
-<li>VSCode</li>
-</ul>
+ Docs CI/CD
 </sub>
 
 </Steps>
 
 ---
 
-## How 
+## `raw-scala-runner` build
 
 <Steps>
 
-- Split pipelines
-<sub>
-<ul>
-<li>Tier1 Engine CI</li>
-<li>Tier2 Engine CI</li>
-</ul>
-</sub>
-- Scala Annotation
-<sub>
-<code>
-@Tier1
-</code>
-</sub>
+- `FROM raw-base-spark...` OR `FROM graalvm-ce...`
 
-- PR comment
-<sub>
-<code>
-(re)?run tier2( test(s)?)?
-</code>
-<blockquote>
-(run tier2 test, run tier2, run tier2 tests, ...)
-</blockquote>
-</sub>
+- we install `sbt` and `scala` -> `raw-sbt`
+
+- we create a dedicated user with specific UID
+
+- we load the `engine` folder and run an `sbt` command to cache deps
 
 </Steps>
 
 ---
 
-## Impact on Dev/Release flow
+## `raw-scala-runner` usage
 
 <Steps>
 
-- Faster dev pace
+- we pre-pull latest stable version on OnPrem/EC2 minions
 
-- Need Tier1 tag ruling
+- we run as non-root user
 
-- Higher risk to merge bugs into main branch
+- we re-build the necessary layer if any major `deps/*.version` changes as `init` step of CI pipeline
 
-- Need decision making on every release regarding main brach state
+</Steps>
+
+---
+
+## Next
+
+<Steps>
+
+- Concurrent run for OnPrem
+
+- One CI solution to rule them all
+
+- Base Images refactoring/optimizations
+
+- Easy major `deps/*.version` update
+
+
+</Steps>
+
+---
+
+## MISC infos
+
+<Steps>
+
+- `raw-postgres` side container
+
+- all `raw-*` images have their own CI/CD
+
+- we use private `ghcr.io` to host those images
+
+</Steps>
+
+---
+
+## Questions
+
+<Steps>
+
+- just-ask ;)
 
 </Steps>
